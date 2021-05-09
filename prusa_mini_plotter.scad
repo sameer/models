@@ -65,6 +65,8 @@ import("stl/MINI-fan-spacer.stl");
                 square([screw_radius, 2*screw_radius]);
             }
         }
+        // ensure the bottom of the heatsink is clear
+        translate(fan_center) sector(fan_center.x, 180, 270);
         translate(bottom_screw) circle(d=screw_hole_diameter);
         if (use_upper_screw) translate(upper_screw) circle(d=screw_hole_diameter);
         
