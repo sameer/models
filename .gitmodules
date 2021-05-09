@@ -1,0 +1,4 @@
+[submodule "NopSCADlib"]
+	path = NopSCADlib
+	url = https://github.com/nophead/NopSCADlib.git
+	shallow = true
