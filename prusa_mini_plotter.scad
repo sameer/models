@@ -34,10 +34,11 @@ module heatsink_mount() {
             translate([0, 0, -fan_width])
             rotate([0, 180, 180])
             translate([-199,-147])
-import("stl/MINI-fan-spacer.stl");
+            color("RoyalBlue")
+            import("stl/MINI-fan-spacer.stl");
             translate([0, 0, -(fan_width + shroud_width + heatsink_width)])
             translate(-fan_center)
-            color("grey") linear_extrude(heatsink_width) quadrant(40, fan_center.x);
+            color("DarkSlateGray") linear_extrude(heatsink_width) quadrant(40, fan_center.x);
         }
     }
     // screw hole + attach to pen arm
