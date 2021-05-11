@@ -25,7 +25,12 @@ jobs:
         run: |
           cd ~/work/models/models/main
           mkdir -p previews
-          /usr/bin/xvfb-run --auto-servernum find . -maxdepth 1 -name '*.scad' -exec openscad {} --hardwarnings --imgsize 1920,1080 --autocenter --viewall -o ./previews/{}.png --preview=throwntogether \;
+          for model in *.scad; do /usr/bin/xvfb-run --auto-servernum openscad "$model" --hardwarnings --imgsize 1920,1080 --autocenter --viewall -o "./previews/${model%.scad}.png" --preview=throwntogether; done
+      - name: Export renders
+        run: |
+          cd ~/work/models/models/main
+          mkdir -p renders
+          for model in *.scad; do /usr/bin/xvfb-run --auto-servernum openscad $model --hardwarnings -o "./renders/${model%.scad}.3mf" -o "./renders/${model%.scad}.amf" -o "./renders/${model%.scad}.off" -o "./renders/${model%.scad}.stl"; done
       - name: Add previews to wiki
         run: |
           cd ~/work/models/models/wiki
