@@ -1,0 +1,43 @@
+name: Render all models
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          path: main
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}.wiki
+          path: wiki
+      - name: Get OpenSCAD
+        run: |
+          sudo add-apt-repository ppa:openscad/releases
+          sudo apt-get update
+          sudo apt-get install openscad
+      - name: Export previews
+        run: |
+          cd ~/work/models/models/main
+          mkdir -p previews
+          /usr/bin/xvfb-run --auto-servernum find . -maxdepth 1 -name '*.scad' -exec openscad {} --hardwarnings --imgsize 1920,1080 --autocenter --viewall -o ./previews/{}.png --preview=throwntogether \;
+      - name: Add previews to wiki
+        run: |
+          cd ~/work/models/models/wiki
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          cp -r ~/work/models/models/main/previews .
+          git add previews
+          git commit -m "Update previews"
+      - name: Push changes to wiki repo
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          repository: ${{github.repository}}.wiki
+          branch: master
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          directory: /home/runner/work/models/models/wiki
