@@ -31,14 +31,14 @@ jobs:
           cd ~/work/models/models/main
           mkdir -p renders
           for model in *.scad; do /usr/bin/xvfb-run --auto-servernum openscad $model --hardwarnings -o "./renders/${model%.scad}.3mf" -o "./renders/${model%.scad}.amf" -o "./renders/${model%.scad}.off" -o "./renders/${model%.scad}.stl"; done
-      - name: Add previews to wiki
+      - name: Update wiki
         run: |
           cd ~/work/models/models/wiki
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           echo "Welcome to the models wiki! Here you can see previews and download rendered models." > Home.md
           for model in ~/work/models/models/main/*.scad;
-            do echo "## $(basename $model .scad)" >> Home.md
+            do echo "## $(basename $model .scad |  sed -e 's/-/ /g' -e 's/\b\(.\)/\u\1/g')" >> Home.md
             echo "[STL](renders/$(basename $model .scad).stl) | [3MF](renders/$(basename $model .scad).3mf) | [AMF](renders/$(basename $model .scad).amf) | [OFF](renders/$(basename $model .scad).off)" >> Home.md;
             echo "### Preview" >> Home.md
             echo "![OpenScad preview](previews/$(basename $model .scad).png)" >> Home.md
@@ -48,7 +48,7 @@ jobs:
           git add Home.md
           cp -r ~/work/models/models/main/previews .
           git add previews
-          git commit -m "Update previews" || echo "No preview changes to commit"
+          git commit -m "Update wiki" || echo "No wiki changes to commit"
       - name: Push changes to wiki repo
         uses: ad-m/github-push-action@v0.6.0
         with:
