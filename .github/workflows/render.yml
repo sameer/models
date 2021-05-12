@@ -38,7 +38,7 @@ jobs:
           git config --local user.name "GitHub Action"
           cp -r ~/work/models/models/main/previews .
           git add previews
-          git commit -m "Update previews"
+          git commit -m "Update previews" || echo "No preview changes to commit"
       - name: Push changes to wiki repo
         uses: ad-m/github-push-action@v0.6.0
         with:
