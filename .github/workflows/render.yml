@@ -44,5 +44,14 @@ jobs:
         with:
           repository: ${{github.repository}}.wiki
           branch: master
-          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           directory: /home/runner/work/models/models/wiki
+      - name: Create release with renders
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Rendered models"
+          files: |
+            /home/runner/work/models/models/main/renders/*
