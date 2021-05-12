@@ -36,6 +36,16 @@ jobs:
           cd ~/work/models/models/wiki
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          echo "Welcome to the models wiki! Here you can see previews and download rendered models." > Home.md
+          for model in ~/work/models/models/main/*.scad;
+            do echo "## $(basename $model .scad)" >> Home.md;
+            echo "[STL](renders/$(basename $model .scad).stl) | [3MF](renders/$(basename $model .scad).3mf) | [AMF](renders/$(basename $model .scad).amf) | [OFF](renders/$(basename $model .scad).off)"
+            echo "### Preview" >> Home.md
+            echo "![OpenScad preview](previews/$(basename $model .scad).png)" >> Home.md
+            echo "### Printed" >> Home.md
+            echo "![Printed model](prints/$(basename $model .scad).jpg)" >> Home.md
+          done
+          git add Home.md
           cp -r ~/work/models/models/main/previews .
           git add previews
           git commit -m "Update previews" || echo "No preview changes to commit"
