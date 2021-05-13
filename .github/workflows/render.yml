@@ -38,8 +38,11 @@ jobs:
           git config --local user.name "GitHub Action"
           echo "Welcome to the models wiki! Here you can see previews and download rendered models." > Home.md
           for model in ~/work/models/models/main/*.scad;
-            do echo "## $(basename $model .scad |  sed -e 's/-/ /g' -e 's/\b\(.\)/\u\1/g')" >> Home.md
-            echo "[STL](renders/$(basename $model .scad).stl) | [3MF](renders/$(basename $model .scad).3mf) | [AMF](renders/$(basename $model .scad).amf) | [OFF](renders/$(basename $model .scad).off)" >> Home.md;
+            do echo "## $(basename $model .scad |  sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g')" >> Home.md
+            echo "Downloads: [STL](https://github.com/sameer/models/releases/download/latest/$(basename $model .scad).stl)" >> Home.md
+            echo " | [3MF](https://github.com/sameer/models/releases/download/latest/$(basename $model .scad).3mf)" >> Home.md
+            echo " | [AMF](https://github.com/sameer/models/releases/download/latest/$(basename $model .scad).amf)" >> Home.md
+            echo " | [OFF](https://github.com/sameer/models/releases/download/latest/$(basename $model .scad).off)" >> Home.md
             echo "### Preview" >> Home.md
             echo "![OpenScad preview](previews/$(basename $model .scad).png)" >> Home.md
             echo "### Printed" >> Home.md
