@@ -10,14 +10,15 @@ My personal collection of models for 3D printing. Go to the [wiki](https://githu
 
 ### How do I download a model?
 
-Under [releases](https://github.com/sameer/models/releases), you can download a zip containing each model in STL format.
+You can find downloads at the [wiki](https://github.com/sameer/models/wiki). They are available in STL, 3MF, AMF, and OFF formats.
 
 ### How do I change a model?
 
 Install [OpenSCAD](https://openscad.org/) and open the file. After you've made your changes, save, render, and export the model in the desried format.
 
 Refer to the [OpenSCAD cheatsheet](http://openscad.org/cheatsheet/) to understand what the different functions do.
+[Mastering OpenSCAD](https://mastering-openscad.eu/buch/introduction/) is a great tutorial if you're interested in learning more.
 
 ### How do I get help?
 
-You can [create a new issue](https://github.com/sameer/models/issues/new) and I'll try to help out.
+[Create a new issue](https://github.com/sameer/models/issues/new) and I'll see what I can do!
