@@ -24,7 +24,7 @@ module heatsink_mount() {
     fan_bracket_width = 2;
     upper_screw = bottom_screw + [32, 32];
     // does not work right now
-    use_upper_screw = false;
+    use_upper_screw = true;
 
     // Show printer parts for reference
     if ($preview) {
@@ -52,47 +52,63 @@ module heatsink_mount() {
                 quadrant(screw_radius+fan_bracket_width, screw_radius);
                 rotate([0, 0, 180])
                 quadrant(screw_radius, screw_radius);
-                translate([-screw_radius, 0])
-                square([2*screw_radius+fan_bracket_width, screw_radius]);
-                translate([-screw_radius+fan_bracket_width,screw_radius])
-                right_triangle(2*screw_radius, holder_z - 2*screw_radius);
+                
+                translate([-screw_radius, 0]) square([2*screw_radius+fan_bracket_width, screw_radius]);
+                translate([-screw_radius+fan_bracket_width,screw_radius]) right_triangle(2*screw_radius, holder_z - 2*screw_radius);
             }
             if (use_upper_screw) translate(upper_screw) {
                 rotate([0, 0, -90])
                 quadrant(screw_radius, screw_radius);
-                quadrant(screw_radius, screw_radius);
-                translate([0, screw_radius])
-                rotate([0,0,180])
-                square([screw_radius, 2*screw_radius]);
+                translate([-fan_bracket_width,0])
+                quadrant(screw_radius+fan_bracket_width, screw_radius);
+                
+                translate([0, screw_radius + fan_bracket_width]) rotate([0,0,180]) square([screw_radius, 2*screw_radius+fan_bracket_width]);
+                
+                translate([-screw_radius, screw_radius]) rotate([0,0,180]) right_triangle(holder_z - 2*screw_radius, 2*screw_radius);
             }
         }
-        // ensure the bottom of the heatsink is clear
-        translate(fan_center) sector(fan_center.x, 180, 270);
+        // ensure the heatsink finks are not blocked
+        translate(fan_center) circle(fan_center.x);
         translate(bottom_screw) circle(d=screw_hole_diameter);
         if (use_upper_screw) translate(upper_screw) circle(d=screw_hole_diameter);
         
     }
     
-    // use heatsink for alignment
-    translate([-heatsink_width,0,0])
-    rotate([90,0,90])
-    linear_extrude(heatsink_width + screw_protrusion)
-    translate(fan_center) {
-        difference() {
-            sector(fan_center.x + fan_bracket_width, 90, 180);
-            sector(fan_center.x, 90, 180);
+    union() {
+        // use heatsink for alignment
+        translate([-heatsink_width,0,0])
+        rotate([90,0,90])
+        linear_extrude(heatsink_width + screw_protrusion)
+        translate(fan_center) {
+            difference() {
+                sector(fan_center.x + fan_bracket_width, 90, 180);
+                sector(fan_center.x, 90, 180);
+            }
         }
-    }
-    translate([-heatsink_width,0,0])
-    rotate([90,0,90])
-    linear_extrude(heatsink_width + screw_protrusion)
-    translate([-fan_bracket_width,screw_radius]) {
-        square([fan_bracket_width, fan_center.y - screw_radius]);
-        translate([screw_radius,0])
-        rotate([0,0,180])
-        difference() {
-            quadrant(screw_radius, screw_radius);
-            square([screw_radius/2, screw_radius]);
+        translate([-heatsink_width,0,0])
+        rotate([90,0,90])
+        linear_extrude(heatsink_width + screw_protrusion)
+        translate([-fan_bracket_width,screw_radius]) {
+            square([fan_bracket_width, fan_center.y - screw_radius]);
+            translate([screw_radius,0])
+            rotate([0,0,180])
+            difference() {
+                quadrant(screw_radius, screw_radius);
+                square([screw_radius/2, screw_radius]);
+            }
+        }
+        if(use_upper_screw) {
+            rotate([90,0,90])
+            linear_extrude(screw_protrusion)
+            translate([-fan_bracket_width,screw_radius] + upper_screw) translate([0,screw_radius/2]) rotate([0,180,90]) {
+                square([fan_bracket_width, fan_center.y - screw_radius]);
+                translate([screw_radius,0])
+                rotate([0,0,180])
+                difference() {
+                    quadrant(screw_radius, screw_radius);
+                    square([screw_radius/2, screw_radius]);
+                }
+            }
         }
     }
 }
