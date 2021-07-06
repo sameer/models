@@ -1,4 +1,4 @@
-// Replacement igniter shaft for Channel Products 1061 Turn Igniter 
+// Replacement igniter shaft for Channel Products 1061 Twist/Turn Igniter
 //
 // This part fits into place by deforming the flange plastic.
 // It does not use the OEM snap ring.
