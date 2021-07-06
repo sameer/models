@@ -46,7 +46,7 @@ jobs:
             echo "### Preview" >> Home.md
             echo "![OpenScad preview](previews/$(basename $model .scad).png)" >> Home.md
             echo "### Printed" >> Home.md
-            echo "![Printed model](prints/$(basename $model .scad).jpg)" >> Home.md
+            echo "![Printed model in action, if available](prints/$(basename $model .scad).jpg)" >> Home.md
           done
           git add Home.md
           cp -r ~/work/models/models/main/previews .
