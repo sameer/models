@@ -4,6 +4,8 @@
 // * 5V to 12V USB Boost Converter ($9) https://www.amazon.com/gp/product/B01AY3XLEY/
 // * USB-A wall charger (free)
 // * This adapter
+//
+// NOTE: because of the orientation, the fan MUST have hydrodynamic bearings. Regular ball bearings will wear down quickly.
 
 include <NopSCADlib/utils/tube.scad>
 include <NopSCADlib/utils/core/rounded_rectangle.scad>
