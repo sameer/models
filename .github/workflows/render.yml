@@ -18,7 +18,6 @@ jobs:
           path: wiki
       - name: Get OpenSCAD
         run: |
-          sudo add-apt-repository ppa:openscad/releases
           sudo apt-get update
           sudo apt-get install openscad
       - name: Export previews
