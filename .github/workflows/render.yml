@@ -8,11 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
           path: main
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           repository: ${{github.repository}}.wiki
           path: wiki
@@ -52,7 +52,7 @@ jobs:
           git add previews
           git commit -m "Update wiki" || echo "No wiki changes to commit"
       - name: Push changes to wiki repo
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v0.8.0
         with:
           repository: ${{github.repository}}.wiki
           branch: master
