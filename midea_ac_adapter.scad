@@ -11,7 +11,7 @@ include <NopSCADlib/utils/sector.scad>
 $fn = 300;
 
 in_to_mm = 25.4;
-epsilon = $preview ? 1E-1 : 0;
+epsilon = $preview ? 0.1 : 0;
 
 midea_od = 5.987 * in_to_mm;
 midea_len = 0.495 * in_to_mm;
