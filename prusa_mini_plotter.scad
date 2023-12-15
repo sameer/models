@@ -5,9 +5,9 @@ include <NopSCADlib/utils/round.scad>
 include <NopSCADlib/utils/rounded_cylinder.scad>
 include <NopSCADlib/utils/sector.scad>
 include <NopSCADlib/utils/thread.scad>
+include <NopSCADlib/vitamins/screws.scad>
 include <NopSCADlib/vitamins/fan.scad>
 include <NopSCADlib/vitamins/fans.scad>
-include <NopSCADlib/vitamins/screws.scad>
 
 $fn = 100;
 
