@@ -1,3 +1,6 @@
-/*.stl
+*.stl
+*.3mf
+*.amf
+*.off
 previews/
 renders/
