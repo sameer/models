@@ -12,9 +12,9 @@
 
 include <NopSCADlib/utils/core/rounded_rectangle.scad>
 include <NopSCADlib/utils/tube.scad>
+include <NopSCADlib/vitamins/screws.scad>
 include <NopSCADlib/vitamins/fan.scad>
 include <NopSCADlib/vitamins/fans.scad>
-include <NopSCADlib/vitamins/screws.scad>
 
 inner_radius = 112 / 2;
 inner_to_foam_width = 12;
