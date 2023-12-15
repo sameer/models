@@ -34,9 +34,26 @@ module bottom_hook() {
   }
 }
 
-union() {
-  rack_hook();
-  translate([ rack_hook_id / 2, 0 ]) linear_segment();
-  translate([ 0, -linear_segment_len ]) bottom_centering_curve();
-  translate([ 0, -linear_segment_len ]) bottom_hook();
+module coat_loop_hanger() {
+  union() {
+    rack_hook();
+    translate([ rack_hook_id / 2, 0 ]) linear_segment();
+    translate([ 0, -linear_segment_len ]) bottom_centering_curve();
+    translate([ 0, -linear_segment_len ]) bottom_hook();
+  }
+}
+
+module coat_rack() {
+  color("gray", alpha = 0.5)
+  rotate([ 90, 0, 0 ])
+      cylinder(h = 200, r = rack_hook_id / 2 - 4, center = true);
+}
+
+if ($preview) {
+  translate([ 0, 0, linear_segment_len + rack_hook_id / 2 ]) {
+    rotate([ 90, 0, 0 ]) coat_loop_hanger();
+    coat_rack();
+  }
+} else {
+  coat_loop_hanger();
 }
