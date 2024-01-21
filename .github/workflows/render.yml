@@ -24,7 +24,7 @@ jobs:
         run: |
           cd ~/work/models/models/main
           mkdir -p previews
-          for model in *.scad; do echo $model && /usr/bin/xvfb-run --auto-servernum openscad "$model" --hardwarnings --imgsize 1920,1080 --autocenter --viewall -o "./previews/${model%.scad}.png" --preview=throwntogether; done
+          for model in *.scad; do echo $model && /usr/bin/xvfb-run --auto-servernum openscad "$model" --hardwarnings --imgsize 1920,1080 --autocenter --viewall -o "./previews/${model%.scad}.png"; done
       - name: Export renders
         run: |
           cd ~/work/models/models/main
