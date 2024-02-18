@@ -74,7 +74,7 @@ module stand() {
         bezier_path(stand_base_control_points, steps=500)
     );
     difference() {
-        translate([-stand_width/2,0]) rotate([90,0,90]) linear_extrude(stand_width) union() for (p = points) translate(p) circle(r=stand_thickness/2);
+        translate([-stand_width/2,0]) rotate([90,0,90]) linear_extrude(stand_width, convexity=2) union() for (p = points) translate(p) circle(r=stand_thickness/2);
         rotate([stand_angle,0]) translate([0,magsafe_position,-puck_thickness+stand_thickness/2]) cylinder(d=puck_diameter, h=puck_thickness+epsilon);
     }
 }
