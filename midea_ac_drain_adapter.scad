@@ -22,8 +22,8 @@ icemaker_hose_id = 3 / 16 * in_to_mm;
 
 icemaker_hose_adapter_length = 11.76;
 icemaker_hose_adapter_thickness = 1.5;
-icemaker_hose_adapter_base_diameter = icemaker_hose_id + 0.5;
-icemaker_hose_adapter_tip_diameter = icemaker_hose_id - 0.5;
+icemaker_hose_adapter_base_diameter = icemaker_hose_id + 0.8;
+icemaker_hose_adapter_tip_diameter = icemaker_hose_id - 0.2;
 
 module adapter() {
   difference() {
