@@ -85,7 +85,11 @@ module stand() {
         bezier_path(stand_base_control_points, steps=500)
     );
     difference() {
-        translate([-stand_width/2,0]) rotate([90,0,90]) linear_extrude(stand_width, convexity=2) union() for (p = points) translate(p) circle(stand_thickness/2);
+        translate([-stand_width/2,0]) rotate([90,0,90]) linear_extrude(stand_width, convexity=2) union() {
+            for (p = points) translate(p) circle(stand_thickness/2);
+            // Square joint at puck holder
+            translate(points[0]) rotate([0, 0, stand_angle]) square(center=true, stand_thickness);
+        }
         rotate([stand_angle,0]) translate([0,magsafe_position+stand_thickness/2, -stand_thickness/2]) cylinder(d=puck_diameter, h=puck_thickness+epsilon);
     }
 }
