@@ -2,3 +2,6 @@
 	path = NopSCADlib
 	url = https://github.com/nophead/NopSCADlib.git
 	shallow = true
+[submodule "scadqr"]
+	path = scadqr
+	url = https://github.com/xypwn/scadqr.git
