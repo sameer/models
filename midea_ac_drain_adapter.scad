@@ -14,7 +14,7 @@ midea_hose_adapter_taper_od = 13.4;
 midea_hose_adapter_id = 10.4;
 midea_hose_adapter_len = 24;
 
-adapter_separator_length = 3;
+adapter_separator_length = 2;
 adapter_separator_diameter = midea_hose_adapter_od + 3;
 
 icemaker_hose_od = 5 / 16 * in_to_mm;
@@ -23,6 +23,7 @@ icemaker_hose_id = 3 / 16 * in_to_mm;
 icemaker_hose_adapter_length = 11.76;
 icemaker_hose_adapter_thickness = 1.5;
 icemaker_hose_adapter_base_diameter = icemaker_hose_id + 0.8;
+icemaker_hose_adapter_mid_diameter = icemaker_hose_id + 0.4;
 icemaker_hose_adapter_tip_diameter = icemaker_hose_id - 0.2;
 
 module adapter() {
@@ -34,22 +35,31 @@ module adapter() {
       // Icemaker side
 
       translate([ 0, 0, adapter_separator_length ]) {
-          cylinder(d1 = icemaker_hose_adapter_base_diameter,
-                   d2 = icemaker_hose_id,
-                   h = icemaker_hose_adapter_length * 3/4);
-          translate([0,0, icemaker_hose_adapter_length * 3/4])
-          cylinder(d1 = icemaker_hose_id,
-                   d2 = icemaker_hose_adapter_tip_diameter,
-                   h = icemaker_hose_adapter_length * 1/4);
+        cylinder(d1 = icemaker_hose_adapter_base_diameter,
+                 d2 = icemaker_hose_adapter_mid_diameter,
+                 h = icemaker_hose_adapter_length * 3 / 4);
+        // Reinforce base to prevent snapping
+        cylinder(d1 = icemaker_hose_adapter_base_diameter + 1,
+                 d2 = icemaker_hose_adapter_base_diameter,
+                 h = icemaker_hose_adapter_length * 1 / 16);
+        translate([ 0, 0, icemaker_hose_adapter_length * 3 / 4 ])
+            cylinder(d1 = icemaker_hose_adapter_mid_diameter,
+                     d2 = icemaker_hose_adapter_tip_diameter,
+                     h = icemaker_hose_adapter_length * 1 / 4);
       }
 
       // Midea side
       rotate([ 180, 0 ]) {
-          cylinder(d1 = midea_hose_adapter_od, d2 = (midea_hose_adapter_od - midea_hose_adapter_taper_od) * 3/4 + midea_hose_adapter_taper_od,
-                   h = midea_hose_adapter_len * 3/4);
-          translate([0,0,midea_hose_adapter_len * 3/4])
-          cylinder(d1 = (midea_hose_adapter_od - midea_hose_adapter_taper_od) * 3/4 + midea_hose_adapter_taper_od, d2 = midea_hose_adapter_taper_od,
-                   h = midea_hose_adapter_len * 1/4);
+        cylinder(d1 = midea_hose_adapter_od,
+                 d2 = (midea_hose_adapter_od - midea_hose_adapter_taper_od) *
+                          3 / 4 +
+                      midea_hose_adapter_taper_od,
+                 h = midea_hose_adapter_len * 3 / 4);
+        translate([ 0, 0, midea_hose_adapter_len * 3 / 4 ]) cylinder(
+            d1 = (midea_hose_adapter_od - midea_hose_adapter_taper_od) * 3 / 4 +
+                 midea_hose_adapter_taper_od,
+            d2 = midea_hose_adapter_taper_od,
+            h = midea_hose_adapter_len * 1 / 4);
       }
     }
 
