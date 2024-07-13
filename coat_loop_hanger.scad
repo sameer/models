@@ -8,6 +8,8 @@ rack_hook_od = 58;
 rack_hook_id = 44;
 linear_segment_len = 40;
 
+$fn = 100;
+
 module rack_hook() {
   rotate_extrude(angle = 180) translate([ rack_hook_id / 2, 0, 0 ])
       circle(d = rod_diameter);
